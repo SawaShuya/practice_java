@@ -3,16 +3,14 @@ import java.util.Scanner;
 public class Janken {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
+    int user_hand_num = -1;
 
-    System.out.println("グー, チョキ, パーを入力してください");
+    do {
+      System.out.println("グー, チョキ, パーを入力してください");
+      user_hand_num = set_hand_num(scanner.next());
+    } while (!check_number(user_hand_num));
 
-    int user_hand_num = set_hund_num(scanner.next());
     int com_hand_num = (int)(Math.random() * 3);
-
-    if (!check_number(user_hand_num, com_hand_num)) {
-      System.exit(0);
-    }
-  
     String user_hand = set_hand_name(user_hand_num);
     String com_hand = set_hand_name(com_hand_num);
     String result = set_result(user_hand_num, com_hand_num);
@@ -21,7 +19,7 @@ public class Janken {
 
   }
 
-  public static int set_hund_num(String str) {
+  public static int set_hand_num(String str) {
     if (str.equals("グー")) {
       return 0;
     } else if (str.equals("チョキ")) {
@@ -45,8 +43,8 @@ public class Janken {
     }
   }
 
-  public static Boolean check_number(int user_hand_num, int com_hand_num) {
-    if (user_hand_num == -1 || com_hand_num == -1) {
+  public static Boolean check_number(int user_hand_num) {
+    if (user_hand_num == -1) {
       System.out.println("入力された値は無効です。");
       return false;
     } else {
